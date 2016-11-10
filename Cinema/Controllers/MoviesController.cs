@@ -14,12 +14,16 @@ namespace Cinema.Controllers
         {
             var movie = new Movie() { Name= "Shrek"  };
 
+            ViewData["Movie"] = movie;
+
+            ViewBag.RandomMovie = movie;
+
+            var viewResult = new ViewResult();
+            movie.Name = "GGwrong";
+            //viewResult.ViewData.Model = movie;
 
              return View(movie);
-            // return Content("Hello World");
-            // return HttpNotFound();
-            //return new EmptyResult();
-            //return RedirectToAction("Index","Home",new { age=1, sortBy="name"});
+
         }
         public ActionResult Edit(int id)
         {
@@ -40,6 +44,8 @@ namespace Cinema.Controllers
 
 
         }
+
+        [Route("movies/reseased/{year:regex(2015|2016)}/{month:regex(1[0-2]|0[1-9]|[1-9])}")]
         public ActionResult ByReleaseDate(int year,int month)
         {
 
